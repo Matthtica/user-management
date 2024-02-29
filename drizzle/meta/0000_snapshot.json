@@ -1,5 +1,5 @@
 {
-  "id": "8d5eb7c1-f80a-4034-b9bb-d7fd60de303f",
+  "id": "d4b76c95-a809-48bc-b734-415ef1f83cb8",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -26,8 +26,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "workspaceId": {
-          "name": "workspaceId",
+        "userId": {
+          "name": "userId",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -35,12 +35,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "product_workspaceId_workspace_id_fk": {
-          "name": "product_workspaceId_workspace_id_fk",
+        "product_userId_users_id_fk": {
+          "name": "product_userId_users_id_fk",
           "tableFrom": "product",
-          "tableTo": "workspace",
+          "tableTo": "users",
           "columnsFrom": [
-            "workspaceId"
+            "userId"
           ],
           "columnsTo": [
             "id"
@@ -49,6 +49,52 @@
           "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "role": {
+      "name": "role",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "permissionCreate": {
+          "name": "permissionCreate",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "permissionRead": {
+          "name": "permissionRead",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "permissionUpdate": {
+          "name": "permissionUpdate",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "permissionDelete": {
+          "name": "permissionDelete",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -74,33 +120,21 @@
           "primaryKey": false,
           "notNull": true
         },
-        "password": {
-          "name": "password",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "workspaceId": {
-          "name": "workspaceId",
+        "roleId": {
+          "name": "roleId",
           "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "role": {
-          "name": "role",
-          "type": "role",
           "primaryKey": false,
           "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "users_workspaceId_workspace_id_fk": {
-          "name": "users_workspaceId_workspace_id_fk",
+        "users_roleId_role_id_fk": {
+          "name": "users_roleId_role_id_fk",
           "tableFrom": "users",
-          "tableTo": "workspace",
+          "tableTo": "role",
           "columnsFrom": [
-            "workspaceId"
+            "roleId"
           ],
           "columnsTo": [
             "id"
@@ -111,45 +145,9 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
-    },
-    "workspace": {
-      "name": "workspace",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "description": {
-          "name": "description",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
     }
   },
-  "enums": {
-    "role": {
-      "name": "role",
-      "values": {
-        "admin": "admin",
-        "user": "user"
-      }
-    }
-  },
+  "enums": {},
   "schemas": {},
   "_meta": {
     "columns": {},
