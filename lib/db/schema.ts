@@ -1,25 +1,24 @@
-import { integer, pgEnum, pgTable, serial, varchar } from "drizzle-orm/pg-core";
-
-export const role_enum = pgEnum('role', ['admin', 'user']);
+import { integer, pgEnum, pgTable, serial, uniqueIndex, varchar, boolean } from "drizzle-orm/pg-core";
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   username: varchar('name').notNull(),
   email: varchar('email').notNull(),
-  password: varchar('password').notNull(),
-  workspaceId: integer('workspaceId').notNull().references(() => workspace.id),
-  role: role_enum('role').notNull(),
+  roleId: integer('roleId').notNull().references(() => role.id),
 })
 
-export const workspace = pgTable('workspace', {
+export const role = pgTable('role', {
   id: serial('id').primaryKey(),
   name: varchar('name').notNull(),
-  description: varchar('description').notNull(),
+  permissionCreate: boolean('permissionCreate').notNull(),
+  permissionRead: boolean('permissionRead').notNull(),
+  permissionUpdate: boolean('permissionUpdate').notNull(),
+  permissionDelete: boolean('permissionDelete').notNull(),
 })
 
 export const product = pgTable('product', {
   id: serial('id').primaryKey(),
   name: varchar('name').notNull(),
   description: varchar('description').notNull(),
-  workspaceId: integer('workspaceId').notNull().references(() => workspace.id),
+  userId: integer('userId').notNull().references(() => users.id),
 })
