@@ -1,30 +1,23 @@
 'use client'
 import React from 'react'
+import { FC } from 'react';
 import { Button } from '../ui/button';
 import ArrowRightAltRoundedIcon from '~icons/material-symbols/arrow-right-alt-rounded';
 import ModeToggle from './ModeToggle';
 import { cn } from '@/lib/utils';
 import clsx from 'clsx';
 
-interface SideDrawerProps {
+interface SideDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean,
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  children?: React.ReactNode
 }
-
-interface SideButtonProps {
-  isOpen: boolean,
-  text: string,
-  children?: React.ReactNode,
-  onClick?: () => void
-}
-
-export function SideDrawer({ isOpen, setIsOpen, children }: SideDrawerProps) {
+const SideDrawer: FC<SideDrawerProps> = ({ isOpen, setIsOpen, children }) => {
+  const childRefs = React.useRef([]);
 
   let nav_width = isOpen ? 'w-auto' : 'w-[3.5em]';
   let arrow_direction = isOpen ? 'rotate-180' : '';
 
-  return <div className={cn(nav_width, "h-screen shadow-lg relative flex gap-3 items-center flex-col p-2 transition-all duration-300")}>
+  return <div className={cn(nav_width, "z-30 bg-background shadow-md relative flex gap-3 items-center flex-col p-2 rounded-md m-2 mr-0 transition-all duration-300")}>
     <ModeToggle className="w-full"/>
     {children}
     <Button
@@ -37,11 +30,19 @@ export function SideDrawer({ isOpen, setIsOpen, children }: SideDrawerProps) {
   </div>
 }
 
-export function SideButton({ isOpen, text, children, onClick }: SideButtonProps) {
-  let width = isOpen ? 'justify-start w-full' : 'w-10 h-10 px-0 py-0';
-
-  return <Button onClick={onClick} variant="outline" className={clsx("flex items-center gap-2 transition-all duration-300", width)}>
+interface SideButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  isOpen: boolean,
+  text: string,
+}
+const SideButton: FC<SideButtonProps> = ({ isOpen, text, children, onClick, ...props }) => {
+  return <Button onClick={onClick} variant="outline" {...props}
+    className={clsx("flex items-center gap-2 transition-all duration-300 h-10 w-10 px-0 py-0", {"justify-start w-full px-2 py-2": isOpen})}>
     {children}
-    {isOpen ? <span>{text}</span> : ''}
+    {isOpen ? <span className="display-none">{text}</span> : ''}
   </Button>
+}
+
+export {
+  SideDrawer,
+  SideButton
 }
