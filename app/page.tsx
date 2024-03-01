@@ -1,20 +1,8 @@
-'use client'
-import React from "react";
-import RawMdiAlarmOff from '~icons/mdi/alarm-off';
-import UserThreeLight from '~icons/ph/users-three';
-import { SideDrawer, SideButton } from "@/components/custom/SideDrawer";
-
 export default function Home() {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  return <div className="w-100 h-screen flex">
-    <SideDrawer isOpen={isOpen} setIsOpen={setIsOpen}>
-      <SideButton isOpen={isOpen} text="Alarm Off">
-        <RawMdiAlarmOff />
-      </SideButton>
-      <SideButton isOpen={isOpen} text="User">
-        <UserThreeLight />
-      </SideButton>
-    </SideDrawer>
+  return <div className="h-full flex flex-col items-start m-14 gap-2 tracking-tight">
+    <h1 className="text-6xl font-bold">
+      Wellcome to Pico SBS
+    </h1>
+    <h2 className="text-xl">The most feature complete ERP solution, and it's cheap!!!</h2>
   </div>
 }
