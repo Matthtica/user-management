@@ -4,7 +4,7 @@ import { RoleRestType } from "@/lib/typedefs/REST-types";
 import { serialize_permission } from "@/lib/db/utils";
 
 export async function POST(request: Request) {
-  console.log("inside /api/roles POST route")
+  console.log("inside /api/role POST route")
   const data: RoleRestType = await request.json();
   console.log(data);
 
@@ -17,8 +17,8 @@ export async function POST(request: Request) {
   return Response.json(result[0]);
 }
 
-export async function GET(request: Request) {
-  console.log("inside /api/roles GET route")
+export async function GET(_: Request) {
+  console.log("inside /api/role GET route")
   // TODO: Can do pagination, with page param
   const result = await db.select().from(role);
   return Response.json(result);
