@@ -17,9 +17,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/components/ui/use-toast';
 
-interface NewRoleDialogProps extends React.HTMLAttributes<HTMLButtonElement> {}
+interface NewRoleDialogProps extends React.HTMLAttributes<HTMLButtonElement> {
+  refetch: () => void
+}
 
-const NewRoleDialog: FC<NewRoleDialogProps> = ({ className, ...props }) => {
+const NewRoleDialog: FC<NewRoleDialogProps> = ({ refetch, className, ...props }) => {
   const [name, setName] = React.useState('');
   const [product_perm, setProductPerm] = React.useState([false, false, false, false]);
   const [workspace_perm, setWorkspacePerm] = React.useState([false, false, false, false]);
@@ -44,7 +46,7 @@ const NewRoleDialog: FC<NewRoleDialogProps> = ({ className, ...props }) => {
   }
   const submit = async () => {
     if (name === '') return;
-    const res = await fetch("/api/create_role", {
+    const res = await fetch("/api/roles", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,6 +62,7 @@ const NewRoleDialog: FC<NewRoleDialogProps> = ({ className, ...props }) => {
           description: `Json: ${res.json()}`,
         })
         reset();
+        refetch();
         return res.json();
     }).catch((err) => {
         toast({
@@ -99,7 +102,9 @@ const NewRoleDialog: FC<NewRoleDialogProps> = ({ className, ...props }) => {
         <DialogClose asChild>
           <Button type='button' variant="secondary" onClick={reset}>Cancel</Button>
         </DialogClose>
-        <Button onClick={submit}>Submit</Button>
+        <DialogClose asChild>
+          <Button onClick={submit}>Submit</Button>
+        </DialogClose>
       </DialogFooter>
     </DialogContent>
   </Dialog>
