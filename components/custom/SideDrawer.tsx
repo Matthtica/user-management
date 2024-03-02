@@ -24,7 +24,7 @@ const SideDrawer: FC<SideDrawerProps> = ({ isOpen, setIsOpen, children }) => {
       size="icon"
       variant="outline"
       onClick={() => setIsOpen(!isOpen)}
-      className="absolute right-0 translate-x-1/2 bottom-3 shadow-lg">
+      className="absolute -right-1 translate-x-1/2 bottom-3 shadow-lg">
       <ArrowRightAltRoundedIcon className={cn(arrow_direction, "w-7 h-7")}/>
     </Button>
   </div>
