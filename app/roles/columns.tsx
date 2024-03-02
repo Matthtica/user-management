@@ -34,30 +34,3 @@ export const columns: ColumnDef<Role>[] = [
     }
   }
 ]
-
-export const mock_data: Role[] = [
-  {
-    id: 1,
-    name: 'Admin',
-    productPermission: 'T|T|T|T',
-    workspacePermission: 'T|T|T|T'
-  },
-  {
-    id: 2,
-    name: 'Customer',
-    productPermission: 'F|T|F|F',
-    workspacePermission: 'F|T|F|F'
-  },
-  {
-    id: 3,
-    name: 'Manager',
-    productPermission: 'T|T|T|F',
-    workspacePermission: 'F|T|T|F',
-  },
-  {
-    id: 4,
-    name: 'Sale Person',
-    productPermission: 'F|T|T|F',
-    workspacePermission: 'F|T|T|F'
-  }
-]
