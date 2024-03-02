@@ -7,7 +7,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import UserThreeLight from '~icons/ph/users-three';
 import UserRoleSetting from '~icons/clarity/administrator-line'
 import HomeOutline from '~icons/ant-design/home-outlined'
-import { SideDrawer, SideButton } from "@/components/custom/SideDrawer";
+import { SideDrawer, SideButton } from "@/components/custom/side-drawer";
 import { useRouter } from "next/navigation";
 import TanstackQueryClientProvider from "@/lib/tanstack-queryclient-provider";
 
@@ -23,7 +23,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.className} flex bg-secondary h-screen`}>
+      <body className={`${inter.className} flex bg-primary-foreground h-screen`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
