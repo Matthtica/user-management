@@ -1,6 +1,6 @@
 export function serialize_permission(permission: boolean[]): string {
   return permission.map((value) => {
-    value ? 'T' : 'F'
+    return value ? 'T' : 'F'
   }).join('|');
 }
 
