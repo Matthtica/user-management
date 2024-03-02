@@ -5,7 +5,7 @@ import {
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
-  username: varchar('name').notNull(),
+  name: varchar('name').notNull(),
   email: varchar('email').notNull(),
   roleId: integer('roleId').notNull().references(() => role.id),
 })
