@@ -21,7 +21,7 @@ const Roles: FC = () => {
       <RoleEntryFormDialog refetch={refetch}/>
     </div>
     <LoadingHelper
-      className="mx-auto mt-42 w-10 h-10"
+      className="mx-auto mt-40 w-10 h-10"
       isPending={isPending} error={error}>
       <DataTable columns={columns} data={data!} />
     </LoadingHelper>
