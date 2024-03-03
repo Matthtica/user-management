@@ -3,6 +3,7 @@ import { Client } from "pg";
 import { sql } from '@vercel/postgres';
 import { drizzle } from "drizzle-orm/vercel-postgres";
 
+/*
 export const client = new Client({
   host: process.env.DATABASE_HOST as string,
   port: parseInt(process.env.DATABASE_PORT as string),
@@ -11,5 +12,5 @@ export const client = new Client({
   database: process.env.DATABASE_NAME as string,
 });
 
-await client.connect();
+await client.connect();*/
 export const db = drizzle(sql);
