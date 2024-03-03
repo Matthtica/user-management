@@ -17,13 +17,11 @@ const RoleEntryFormDialog: FC<RoleEntryFormDialogProps> = ({ refetch, className,
   const { toast } = useToast();
 
   const productToggler = (index: number) => {
-    console.log("product toggler")
     let newPerm = [...product_perm];
     newPerm[index] = !newPerm[index];
     setProductPerm(newPerm);
   }
   const workspaceToggler = (index: number) => {
-    console.log("workspace toggler")
     let newPerm = [...workspace_perm];
     newPerm[index] = !newPerm[index];
     setWorkspacePerm(newPerm);
@@ -46,18 +44,11 @@ const RoleEntryFormDialog: FC<RoleEntryFormDialogProps> = ({ refetch, className,
         workspacePermission: workspace_perm
       }),
     }).then((res) => {
-        toast({
-          title: "Role Created",
-          description: `Json: ${res.json()}`,
-        })
         reset();
         refetch();
         return res.json();
     }).catch((err) => {
-        toast({
-          title: "Error",
-          description: `Json: ${err}`,
-        })
+        console.log(err);
     });
   }
 
