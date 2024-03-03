@@ -2,25 +2,29 @@
 import React, { FC } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import LoadingHelper from '@/components/custom/loading-helper'
-import { columns, mock_data } from './columns'
-import { DataTable } from './data-table'
+import { columns } from './columns'
+import DataTable from '@/components/custom/data-table'
 import { type Role } from '@/lib/db/schema';
-import NewRoleDialog from './new-role-dialog'
+import RoleEntryFormDialog from './role-entry-form-dialog'
 
 const Roles: FC = () => {
-  /*
-  const { isPending, error, data } = useQuery<Role[]>({
+  const { isPending, error, data, refetch } = useQuery<Role[]>({
     queryKey: ['roles'],
-    queryFn: () => fetch('/api/roles').then((res) => res.json()),
+    queryFn: () => fetch('/api/roles')
+      .then((res: Response) => res.json())
+      .catch((err: any) => console.log(err)),
   });
-  */
 
   return <div className="m-5 flex flex-col gap-3">
     <div className="flex items-center justify-between">
       <h1 className="text-3xl font-bold">Roles Manager</h1>
-      <NewRoleDialog />
+      <RoleEntryFormDialog refetch={refetch}/>
     </div>
-    <DataTable columns={columns} data={mock_data} />
+    <LoadingHelper
+      className="mx-auto mt-42 w-10 h-10"
+      isPending={isPending} error={error}>
+      <DataTable columns={columns} data={data!} />
+    </LoadingHelper>
   </div>
 }
 
