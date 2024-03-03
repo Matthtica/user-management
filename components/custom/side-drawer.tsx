@@ -13,10 +13,10 @@ interface SideDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 const SideDrawer: FC<SideDrawerProps> = ({ isOpen, setIsOpen, children }) => {
 
-  let nav_width = isOpen ? 'min-w-32' : 'w-[3.5em]';
+  let nav_width = isOpen ? 'w-32' : 'w-[3.5em]';
   let arrow_direction = isOpen ? 'rotate-180' : '';
 
-  return <div className={cn(nav_width, "z-30 bg-background shadow-md relative flex gap-3 items-center flex-col p-2 rounded-md m-2 mr-0 transition-all duration-300")}>
+  return <div className={cn("z-30 bg-background shadow-md relative flex gap-3 items-center flex-col p-2 rounded-md m-2 mr-0 transition-all duration-300", nav_width)}>
     <ModeToggle className="w-full"/>
     {children}
     <Button
@@ -24,7 +24,7 @@ const SideDrawer: FC<SideDrawerProps> = ({ isOpen, setIsOpen, children }) => {
       variant="outline"
       onClick={() => setIsOpen(!isOpen)}
       className="absolute -right-1 translate-x-1/2 bottom-3 shadow-lg">
-      <ArrowRightAltRoundedIcon className={cn(arrow_direction, "w-7 h-7")}/>
+      <ArrowRightAltRoundedIcon className={cn("w-7 h-7 transition-all duration-300", arrow_direction)}/>
     </Button>
   </div>
 }
