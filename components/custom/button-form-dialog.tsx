@@ -17,13 +17,12 @@ interface BottomFormDialogProps extends React.HTMLAttributes<HTMLButtonElement> 
   text: string,
   title: string,
   description: string,
-  onReset: () => void,
-  onSubmit: () => void,
-  refetch: () => void
+  onReset?: () => void,
+  onSubmit?: () => void,
 }
 
 const ButtonFormDialog: FC<BottomFormDialogProps> =
-({ text, title, description, onReset, onSubmit, refetch, className, children, ...props }) => {
+({ text, title, description, onReset, onSubmit, className, children, ...props }) => {
 
   return <Dialog>
     <DialogTrigger {...props} className={cn("bg-primary rounded text-primary-foreground flex gap-2 py-2 px-3 font-medium", className)}>
