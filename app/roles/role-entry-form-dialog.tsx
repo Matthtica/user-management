@@ -92,7 +92,7 @@ interface CheckboxsRenderProps extends React.HTMLAttributes<HTMLDivElement> {
 const RenderCheckBoxs: FC<CheckboxsRenderProps> = ({ id, perm, toggler, className, ...props }) => {
   return <div {...props} className="flex gap-4">
     {CRUD.map((op: string, index) => {
-      return <div className="flex items-center gap-1" key={op}>
+      return <div className="flex items-center gap-1" key={index}>
         <Checkbox
           key={op}
           id={op + id}
