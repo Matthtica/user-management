@@ -28,13 +28,6 @@ const UserEntryFormDialog: FC<Props> = ({roles, refetch}: Props) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
 
-  const { isPending, error, data } = useQuery<Role[]>({
-    queryKey: ['roles'],
-    queryFn: () => fetch('/api/roles')
-      .then((res) => res.json())
-      .catch((err) => console.log(err)),
-  });
-
   const reset = () => {
     setName('');
     setEmail('');
@@ -54,18 +47,11 @@ const UserEntryFormDialog: FC<Props> = ({roles, refetch}: Props) => {
         roleId: parseInt(value)
       }),
     }).then((res) => {
-        toast({
-          title: "User Created",
-          description: `Json: ${res.json()}`,
-        })
         reset();
         refetch();
         return res.json();
     }).catch((err) => {
-        toast({
-          title: "Error",
-          description: `Json: ${err}`,
-        })
+        console.log(err);
     });
   }
 
@@ -88,7 +74,6 @@ const UserEntryFormDialog: FC<Props> = ({roles, refetch}: Props) => {
             role="combobox"
             aria-expanded={open}
             className="w-[200px] justify-between flex items-center"
-            disabled={isPending}
           >
             {value ? roles[value].label : "Select a role"}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -99,26 +84,24 @@ const UserEntryFormDialog: FC<Props> = ({roles, refetch}: Props) => {
             <CommandInput placeholder="Search role..." />
             <CommandEmpty>No role found.</CommandEmpty>
             <CommandGroup>
-              <LoadingHelper isPending={isPending} error={error}>
-                {Object.values(roles).map((role) => (
-                  <CommandItem
-                    key={role.value}
-                    value={role.value}
-                    onSelect={(currentValue) => {
-                      setValue(currentValue === value ? '' : currentValue)
-                      setOpen(false)
-                    }}
-                  >
-                    <Check
-                      className={cn(
-                        "mr-2 h-4 w-4",
-                        value === role.value ? "opacity-100" : "opacity-0"
-                      )}
-                    />
-                    {role.label}
-                  </CommandItem>
-                ))}
-              </LoadingHelper>
+              {Object.values(roles).map((role) => (
+                <CommandItem
+                  key={role.value}
+                  value={role.value}
+                  onSelect={(currentValue) => {
+                    setValue(currentValue === value ? '' : currentValue)
+                    setOpen(false)
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      value === role.value ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  {role.label}
+                </CommandItem>
+              ))}
             </CommandGroup>
           </Command>
         </PopoverContent>
