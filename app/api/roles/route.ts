@@ -8,13 +8,11 @@ export async function POST(request: Request) {
   const data: RoleRestType = await request.json();
   console.log(data);
 
-  const result = await db.insert(role).values({
+  await db.insert(role).values({
     name: data.name,
     productPermission: serialize_permission(data.productPermission),
     workspacePermission: serialize_permission(data.workspacePermission),
-  }).returning();
-
-  return Response.json(result[0]);
+  });
 }
 
 export async function GET(_: Request) {
