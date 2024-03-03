@@ -8,10 +8,11 @@ interface LoadingHelperProps extends React.HTMLAttributes<HTMLDivElement> {
 
 // TODO: Loading animation
 // TODO: Error message red and big like serious error
-export default function LoadingHelper( { isPending, error, children, ...props }: LoadingHelperProps) {
-  const LoadingComp = <BubbleLoading className="w-10 h-10 mx-auto mt-40" />
+export default function LoadingHelper( { isPending, error, children, className, ...props }: LoadingHelperProps) {
+  const LoadingComp = <BubbleLoading className={className} />
+  const ErrorComp = <div className={className} {...props}>{error?.message}</div>
 
   return <div {...props}>
-    {isPending ? LoadingComp : error ? error.message : children}
+    {isPending ? LoadingComp : error ? ErrorComp : children}
   </div>;
 }
