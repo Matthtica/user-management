@@ -10,6 +10,7 @@ import HomeOutline from '~icons/ant-design/home-outlined'
 import { SideDrawer, SideButton } from "@/components/custom/side-drawer";
 import { useRouter } from "next/navigation";
 import TanstackQueryClientProvider from "@/lib/tanstack-queryclient-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,6 +45,7 @@ export default function RootLayout({
             <div className="flex-1 m-2 bg-background rounded-md overflow-hidden shadow-md">
               {children}
             </div>
+            <Toaster />
           </TanstackQueryClientProvider>
         </ThemeProvider>
       </body>
