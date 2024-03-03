@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { Client } from "pg";
-import { drizzle } from "drizzle-orm/node-postgres";
+import { sql } from '@vercel/postgres';
+import { drizzle } from "drizzle-orm/vercel-postgres";
 
 export const client = new Client({
   host: process.env.DATABASE_HOST as string,
@@ -11,4 +12,4 @@ export const client = new Client({
 });
 
 await client.connect();
-export const db = drizzle(client);
+export const db = drizzle(sql);
