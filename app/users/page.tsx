@@ -52,7 +52,7 @@ export default function Users() {
     return result;
   }
 
-  return <div className="m-5 flex flex-col gap-3">
+  return <div className="m-5 flex-1 flex flex-col gap-3 overflow-y-hidden">
     <div className="flex items-center justify-between">
       <h1 className="text-3xl font-bold">Users Manager</h1>
       <FetchLoading isPending={isPendingRole} error={errorRole}>
@@ -62,7 +62,7 @@ export default function Users() {
     <FetchLoading
       className="mx-auto mt-40 w-10 h-10"
       isPending={isPending && isPendingRole} error={error}>
-      <DataTable columns={columns} data={convertRoleIdToName()} />
+      <DataTable columns={columns} data={convertRoleIdToName()} className="overflow-y-scroll"/>
     </FetchLoading>
   </div>
 }
