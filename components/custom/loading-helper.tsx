@@ -21,9 +21,8 @@ const FetchLoading: FC<FetchLoadingProps> = ( { isPending, error, children, clas
   </div>;
 }
 
-interface PageLoadingProps extends React.HTMLAttributes<HTMLDivElement> {}
-const PageLoading: FC<PageLoadingProps> = () => {
-  return <LoadingSpinner className="w-10 h-10 mx-auto mt-52"/>
+const PageLoading: FC = () => {
+  return <LoadingSpinner className="w-10 h-10 mx-auto mt-[45%]"/>
 }
 
 export {
