@@ -30,11 +30,12 @@ const SideDrawer: FC<SideDrawerProps> = ({ isOpen, setIsOpen, children }) => {
 }
 
 interface SideButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  isCurrent: boolean;
   isOpen: boolean,
   text: string,
 }
-const SideButton: FC<SideButtonProps> = ({ isOpen, text, children, className, onClick, ...props }) => {
-  return <Button onClick={onClick} variant="outline" {...props}
+const SideButton: FC<SideButtonProps> = ({ isCurrent, isOpen, text, children, className, onClick, ...props }) => {
+  return <Button onClick={onClick} variant={isCurrent ? 'default' : 'outline'} {...props}
     className={clsx("flex items-center gap-2 transition-all duration-300 justify-center h-10 w-10 px-0 py-0", {"justify-start w-full px-2 py-2": isOpen}, className)}>
     {children}
     {isOpen ? <span className="display-none">{text}</span> : ''}

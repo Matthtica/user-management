@@ -21,6 +21,12 @@ export default function RootLayout({
 }>) {
   const [isOpen, setIsOpen] = React.useState(false);
   const router = useRouter();
+  const [currentRoute, setCurrentRoute] = React.useState('/');
+
+  const changeRoute = (route: string) => {
+    setCurrentRoute(route);
+    router.push(route);
+  }
 
   return (
     <html lang="en">
@@ -32,13 +38,25 @@ export default function RootLayout({
         >
           <TanstackQueryClientProvider>
             <SideDrawer isOpen={isOpen} setIsOpen={setIsOpen}>
-              <SideButton isOpen={isOpen} text="Home" onClick={() => router.push('/')}>
+              <SideButton
+                isOpen={isOpen}
+                isCurrent={currentRoute === '/'}
+                text="Home"
+                onClick={() => changeRoute('/')}>
                 <HomeOutline />
               </SideButton>
-              <SideButton isOpen={isOpen} text="User" onClick={() => router.push('/users')}>
+              <SideButton
+                isOpen={isOpen}
+                isCurrent={currentRoute === '/users'}
+                text="User"
+                onClick={() => changeRoute('/users')}>
                 <UserThreeLight />
               </SideButton>
-              <SideButton isOpen={isOpen} text="Role" onClick={() => router.push('/roles')}>
+              <SideButton
+                isOpen={isOpen}
+                isCurrent={currentRoute === '/roles'}
+                text="Role"
+                onClick={() => changeRoute('/roles')}>
                 <UserRoleSetting />
               </SideButton>
             </SideDrawer>
