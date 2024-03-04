@@ -16,9 +16,9 @@ const FetchLoading: FC<FetchLoadingProps> = ( { isPending, error, children, clas
   const LoadingComp = <LoadingSpinner className={className} />
   const ErrorComp = <div className={className} {...props}>{error?.message}</div>
 
-  return <div {...props}>
+  return <>
     {isPending ? LoadingComp : error ? ErrorComp : children}
-  </div>;
+  </>
 }
 
 const PageLoading: FC = () => {

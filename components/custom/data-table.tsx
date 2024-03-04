@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import {
   ColumnDef,
   SortingState,
@@ -17,14 +17,15 @@ import {
   TableRow
 } from "@/components/ui/table"
 import React from "react"
+import { cn } from "@/lib/utils"
 
-interface DataTableProps<TData, TValue> {
+interface DataTableProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
 export default function DataTable<TData, TValue>({
-  columns, data,
+  columns, data, className
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
 
@@ -40,7 +41,7 @@ export default function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="rounded-md border shadow-md">
+    <div className={cn("rounded-md border", className)}>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

@@ -60,7 +60,7 @@ export default function RootLayout({
                 <UserRoleSetting />
               </SideButton>
             </SideDrawer>
-            <div className="flex-1 m-2 bg-background rounded-md overflow-hidden shadow-md">
+            <div className="flex-1 m-2 bg-background rounded-md shadow-md flex flex-col">
               {children}
             </div>
             <Toaster />
