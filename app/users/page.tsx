@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import DataTable from '@/components/custom/data-table'
-import LoadingHelper from '@/components/custom/loading-helper'
+import { FetchLoading } from '@/components/custom/loading-helper'
 import { columns } from './columns';
 import { type User, type Role } from '@/lib/db/schema';
 import { useQuery } from '@tanstack/react-query'
@@ -55,14 +55,14 @@ export default function Users() {
   return <div className="m-5 flex flex-col gap-3">
     <div className="flex items-center justify-between">
       <h1 className="text-3xl font-bold">Users Manager</h1>
-      <LoadingHelper isPending={isPendingRole} error={errorRole}>
+      <FetchLoading isPending={isPendingRole} error={errorRole}>
         <UserEntryFormDialog roles={dataRole!} refetch={refetch}/>
-      </LoadingHelper>
+      </FetchLoading>
     </div>
-    <LoadingHelper
+    <FetchLoading
       className="mx-auto mt-40 w-10 h-10"
       isPending={isPending && isPendingRole} error={error}>
       <DataTable columns={columns} data={convertRoleIdToName()} />
-    </LoadingHelper>
+    </FetchLoading>
   </div>
 }

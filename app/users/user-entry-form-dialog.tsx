@@ -11,7 +11,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
 import { toast } from "@/components/ui/use-toast";
-import LoadingHelper from "@/components/custom/loading-helper";
+import { FetchLoading } from "@/components/custom/loading-helper";
 
 export interface RoleDisplayMap {
   [key: string]: { value: string, label: string }

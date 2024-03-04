@@ -1,7 +1,7 @@
 'use client'
 import React, { FC } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import LoadingHelper from '@/components/custom/loading-helper'
+import { FetchLoading } from '@/components/custom/loading-helper'
 import { columns } from './columns'
 import DataTable from '@/components/custom/data-table'
 import { type Role } from '@/lib/db/schema';
@@ -20,11 +20,11 @@ const Roles: FC = () => {
       <h1 className="text-3xl font-bold">Roles Manager</h1>
       <RoleEntryFormDialog refetch={refetch}/>
     </div>
-    <LoadingHelper
+    <FetchLoading
       className="mx-auto mt-40 w-10 h-10"
       isPending={isPending} error={error}>
       <DataTable columns={columns} data={data!} />
-    </LoadingHelper>
+    </FetchLoading>
   </div>
 }
 
