@@ -1,7 +1,5 @@
-import LoadingSpinner from "@/components/custom/loading-spinner";
+import { PageLoading } from "@/components/custom/loading-helper"
 
 export default function Loading() {
-  return <div className="h-full  w-full flex flex-col items-center">
-      <LoadingSpinner className="w-10 h-10"/>
-  </div>
+  return <PageLoading />
 }
