@@ -78,3 +78,25 @@
 .glow-text {
   text-shadow: 0 0 12px;
 }
+
+.side-text {
+  position: absolute;
+  transition: all 0.3s;
+  transform: scale(0.0);
+  opacity: 0.0;
+}
+.side-drawer .side-button {
+  transition: all 0.3s;
+}
+
+.side-drawer:hover {
+  width: 8rem;
+}
+.side-drawer:hover .side-text {
+  position: relative;
+  transform: scale(1.0);
+  opacity: 1.0;
+}
+.side-drawer:hover .side-button {
+  justify-content: start;
+}

@@ -1,48 +1,43 @@
-'use client'
 import React from 'react'
-import { FC } from 'react';
 import { Button } from '../ui/button';
-import ArrowRightAltRoundedIcon from '~icons/material-symbols/arrow-right-alt-rounded';
 import ModeToggle from './mode-toggle';
 import { cn } from '@/lib/utils';
 import clsx from 'clsx';
 
-interface SideDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
-  isOpen: boolean,
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
-}
-const SideDrawer: FC<SideDrawerProps> = ({ isOpen, setIsOpen, children }) => {
-
-  let nav_width = isOpen ? 'w-32' : 'w-[3.5em]';
-  let arrow_direction = isOpen ? 'rotate-180' : '';
-
-  return <div className={cn("z-30 bg-background shadow-md relative flex gap-3 items-center flex-col p-2 rounded-md m-2 mr-0 transition-all duration-300", nav_width)}>
-    <ModeToggle className="w-full"/>
+interface SideDrawerProps extends React.HTMLAttributes<HTMLDivElement> {}
+function SideDrawer({ children }: SideDrawerProps) {
+  return <div className={cn("z-30 bg-background shadow-md w-14 relative transition-all",
+    "duration-300 grid grid-cols-1 auto-rows-min gap-3 p-2 rounded-md m-2 mr-0 side-drawer",
+    "overflow-y-scroll overflow-x-hidden")}>
+    <ModeToggle className="w-full h-10"/>
+    <div className="border-b w-5/6 mx-auto"></div>
     {children}
-    <Button
-      size="icon"
-      variant="outline"
-      onClick={() => setIsOpen(!isOpen)}
-      className="absolute -right-1 translate-x-1/2 bottom-3 shadow-lg">
-      <ArrowRightAltRoundedIcon className={cn("w-7 h-7 transition-all duration-300", arrow_direction)}/>
-    </Button>
   </div>
 }
 
 interface SideButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   isCurrent: boolean;
-  isOpen: boolean,
-  text: string,
 }
-const SideButton: FC<SideButtonProps> = ({ isCurrent, isOpen, text, children, className, onClick, ...props }) => {
+function SideButton({ isCurrent, children, className, onClick, ...props }: SideButtonProps) {
   return <Button onClick={onClick} variant={isCurrent ? 'default' : 'outline'} {...props}
-    className={clsx("flex items-center gap-2 transition-all duration-300 justify-center h-10 w-10 px-0 py-0", {"justify-start w-full px-2 py-2": isOpen}, className)}>
+    className={clsx("flex items-center gap-2 side-button justify-center w-full px-2 py-2 h-10", className)}>
     {children}
-    {isOpen ? <span className="display-none">{text}</span> : ''}
   </Button>
+}
+
+interface SideButtonLabelProps extends React.HTMLAttributes<HTMLSpanElement> {}
+function SideButtonLabel({ children, className, ...props }: SideButtonLabelProps) {
+  return <span className={clsx("side-text", className)}{...props}>{children}</span>
+}
+
+interface SideButtonIconProps extends React.HTMLAttributes<HTMLDivElement> {}
+function SideButtonIcon({ children, className, ...props }: SideButtonIconProps) {
+  return <div className={clsx("transition-all duration-300", className)} {...props}>{children}</div>
 }
 
 export {
   SideDrawer,
-  SideButton
+  SideButton,
+  SideButtonLabel,
+  SideButtonIcon
 }
