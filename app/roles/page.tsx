@@ -1,5 +1,5 @@
 'use client'
-import React, { FC } from 'react'
+import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { FetchLoading } from '@/components/custom/loading-helper'
 import { columns } from './components/columns'
@@ -8,7 +8,7 @@ import { type Role } from '@/lib/db/schema';
 import RoleEntryFormDialog from './components/role-entry-form-dialog'
 import { staleTime } from '@/lib/constants'
 
-const Roles: FC = () => {
+export default function Roles() {
   const { isPending, error, data, refetch } = useQuery<Role[]>({
     queryKey: ['roles'],
     queryFn: () => fetch('/api/roles')
@@ -29,5 +29,3 @@ const Roles: FC = () => {
     </FetchLoading>
   </div>
 }
-
-export default Roles;
