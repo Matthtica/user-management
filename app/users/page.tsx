@@ -6,6 +6,7 @@ import { columns } from './columns';
 import { type User, type Role } from '@/lib/db/schema';
 import { useQuery } from '@tanstack/react-query'
 import UserEntryFormDialog, { type RoleDisplayMap } from './user-entry-form-dialog'
+import { staleTime } from '@/lib/constants';
 
 export default function Users() {
   const { isPending, error, data, refetch } = useQuery<User[]>({
@@ -13,6 +14,7 @@ export default function Users() {
     queryFn: () => fetch('/api/users').then((res) => {
       return res.json()
     }).catch((err) => console.log(err)),
+    staleTime
   });
   const {
     isPending: isPendingRole,
@@ -31,7 +33,8 @@ export default function Users() {
         }
       })
       return result;
-    }
+    },
+    staleTime
   })
 
   interface UserDisplay {

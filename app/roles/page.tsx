@@ -6,6 +6,7 @@ import { columns } from './columns'
 import DataTable from '@/components/custom/data-table'
 import { type Role } from '@/lib/db/schema';
 import RoleEntryFormDialog from './role-entry-form-dialog'
+import { staleTime } from '@/lib/constants'
 
 const Roles: FC = () => {
   const { isPending, error, data, refetch } = useQuery<Role[]>({
@@ -13,6 +14,7 @@ const Roles: FC = () => {
     queryFn: () => fetch('/api/roles')
       .then((res: Response) => res.json())
       .catch((err: any) => console.log(err)),
+    staleTime,
   });
 
   return <div className="flex-1 m-5 flex flex-col gap-3 overflow-y-hidden">
