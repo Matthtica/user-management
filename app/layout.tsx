@@ -8,7 +8,7 @@ import UserThreeLight from '~icons/ph/users-three';
 import UserRoleSetting from '~icons/clarity/administrator-line';
 import HomeOutline from '~icons/ant-design/home-outlined';
 import TextEditorNavIcon from '~icons/gala/editor';
-import { SideDrawer, SideButton } from "@/components/custom/side-drawer";
+import { SideDrawer, SideButton, SideButtonLabel, SideButtonIcon } from "@/components/custom/side-drawer";
 import { useRouter } from "next/navigation";
 import TanstackQueryClientProvider from "@/lib/tanstack-queryclient-provider";
 import { Toaster } from "@/components/ui/toaster";
@@ -21,12 +21,18 @@ interface RouteConfig {
   icon: React.ReactElement
 }
 
+const routes: RouteConfig[] = [
+  { text: "Home", route: '/', icon: <HomeOutline /> },
+  { text: "User", route: '/users', icon: <UserThreeLight /> },
+  { text: "Role", route: '/roles', icon: <UserRoleSetting /> },
+  { text: "Editor", route: '/editor', icon: <TextEditorNavIcon /> },
+];
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isOpen, setIsOpen] = React.useState(false);
   const router = useRouter();
   const [currentRoute, setCurrentRoute] = React.useState('/');
 
@@ -34,13 +40,6 @@ export default function RootLayout({
     setCurrentRoute(route);
     router.push(route);
   }
-
-  const routes: RouteConfig[] = [
-    { text: "Home", route: '/', icon: <HomeOutline /> },
-    { text: "User", route: '/users', icon: <UserThreeLight /> },
-    { text: "Role", route: '/roles', icon: <UserRoleSetting /> },
-    { text: "Editor", route: '/editor', icon: <TextEditorNavIcon /> },
-  ];
 
   return (
     <html lang="en">
@@ -51,16 +50,15 @@ export default function RootLayout({
           enableSystem
         >
           <TanstackQueryClientProvider>
-            <SideDrawer isOpen={isOpen} setIsOpen={setIsOpen}>
+            <SideDrawer>
               {routes.map((route) => (
                 <SideButton
                   key={route.text}
-                  isOpen={isOpen}
                   isCurrent={currentRoute === route.route}
-                  text={route.text}
                   onClick={() => changeRoute(route.route)}
                 >
-                  {route.icon}
+                  <SideButtonIcon>{route.icon}</SideButtonIcon>
+                  <SideButtonLabel>{route.text}</SideButtonLabel>
                 </SideButton>
               ))}
             </SideDrawer>
