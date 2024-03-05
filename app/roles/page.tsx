@@ -2,10 +2,10 @@
 import React, { FC } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { FetchLoading } from '@/components/custom/loading-helper'
-import { columns } from './columns'
+import { columns } from './components/columns'
 import DataTable from '@/components/custom/data-table'
 import { type Role } from '@/lib/db/schema';
-import RoleEntryFormDialog from './role-entry-form-dialog'
+import RoleEntryFormDialog from './components/role-entry-form-dialog'
 import { staleTime } from '@/lib/constants'
 
 const Roles: FC = () => {
