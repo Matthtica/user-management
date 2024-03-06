@@ -13,6 +13,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow
@@ -84,13 +85,15 @@ export default function DataTable<TData, TValue>({
               </TableCell>
             </TableRow>
           )}
-          {isLoading ?
-          <TableRow>
-            <TableCell colSpan={columns.length} className="h-24 text-center flex justify-center">
-              <LoadingSpinner />
-            </TableCell>
-          </TableRow> : ''}
         </TableBody>
+        {isLoading ?
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={columns.length} className="text-center h-10">
+              <LoadingSpinner className="m-auto h-6 w-6"/>
+            </TableCell>
+          </TableRow>
+        </TableFooter> : ''}
       </Table>
     </div>
   )
