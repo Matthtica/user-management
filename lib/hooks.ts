@@ -3,6 +3,8 @@ import { type Role, type User } from './db/schema';
 import { staleTime } from './constants';
 import { RoleDisplayMap, UserDisplay } from './typedefs/display-types';
 import React from 'react';
+import { useToast } from '@/components/ui/use-toast';
+import { ResponseToastMessage } from './typedefs/rest-types';
 
 export function useRoles() {
   const { isPending, error, data, isFetching, refetch, isFetched } = useQuery<Role[]>({
@@ -52,6 +54,7 @@ export function useDisplayUsers() {
     console.log("tranform_users_to_display");
     const users_with_role_names = data.map((user) => {
       return {
+        id: user.id,
         name: user.name,
         email: user.email,
         role: roles![user.roleId].label
@@ -109,4 +112,25 @@ export function useRolesMap() {
   return {
     isPending, isFetching, error, roles: data, isFetched, refetch
   }
+}
+
+export function useDelete(url: string, id: number, refetch: () => void) {
+  const { toast } = useToast();
+
+  const onDelete = async () => {
+    await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(id),
+    })
+    .then(res => res.json())
+    .then((msg: ResponseToastMessage) => {
+      refetch();
+      toast(msg)
+    });
+  }
+
+  return onDelete
 }
