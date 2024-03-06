@@ -42,10 +42,10 @@ export default function UserEntryFormDialog({ refetch }: Props) {
         roleId: parseInt(value)
       }),
     }).then((res) => {
-      reset();
-      refetch();
       return res.json();
     }).then(data => {
+      reset();
+      refetch();
       toast({
         description: "User created",
         title: "Success",
