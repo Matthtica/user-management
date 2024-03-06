@@ -7,10 +7,10 @@ export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   name: varchar('name').notNull(),
   email: varchar('email').notNull(),
-  roleId: integer('roleId').notNull().references(() => role.id),
+  roleId: integer('roleId').notNull().references(() => roles.id),
 })
 
-export const role = pgTable('role', {
+export const roles = pgTable('role', {
   id: serial('id').primaryKey(),
   name: varchar('name').notNull(),
   productPermission: varchar('productPermission').notNull(),
@@ -25,4 +25,4 @@ export const product = pgTable('product', {
 })
 
 export type User = typeof users.$inferSelect;
-export type Role = typeof role.$inferSelect;
+export type Role = typeof roles.$inferSelect;
