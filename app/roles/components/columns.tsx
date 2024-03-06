@@ -5,6 +5,7 @@ import { deserializeToDisplayString } from "@/lib/db/utils";
 import { Button } from "@/components/ui/button";
 import DeletedRounded from '~icons/material-symbols/delete-rounded';
 import { useDelete, useRoles } from "@/lib/hooks";
+import DeleteRoleButton from "./delete-button";
 
 export const columns: ColumnDef<Role>[] = [
   {
@@ -43,12 +44,7 @@ export const columns: ColumnDef<Role>[] = [
     accessorKey: 'action',
     header: "Action",
     cell: ({ row }) => {
-      const { refetch } = useRoles();
-      const onDelete = useDelete('/api/roles', row.original.id, refetch);
-
-      return <Button variant="outline" size="icon" onClick={onDelete}>
-        <DeletedRounded />
-      </Button>
+      return <DeleteRoleButton itemId={row.original.id}></DeleteRoleButton>
     }
   }
 ]
