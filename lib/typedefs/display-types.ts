@@ -8,6 +8,7 @@ export interface RoleDisplayMap {
 }
 
 export interface UserDisplay {
+  id: number,
   name: string,
   email: string,
   role: string,
