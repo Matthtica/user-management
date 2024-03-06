@@ -7,6 +7,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import { LoadingSpinner } from '@/components/custom/loading-helper';
 
 import {
   Table,
@@ -20,12 +21,13 @@ import React from "react"
 import { cn } from "@/lib/utils"
 
 interface DataTableProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
+  isLoading: boolean,
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
 export default function DataTable<TData, TValue>({
-  columns, data, className
+  isLoading, columns, data, className
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
 
@@ -82,6 +84,12 @@ export default function DataTable<TData, TValue>({
               </TableCell>
             </TableRow>
           )}
+          {isLoading ?
+          <TableRow>
+            <TableCell colSpan={columns.length} className="h-24 text-center flex justify-center">
+              <LoadingSpinner />
+            </TableCell>
+          </TableRow> : ''}
         </TableBody>
       </Table>
     </div>
