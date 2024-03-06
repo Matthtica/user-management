@@ -1,12 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-interface UserDisplay {
-  name: string,
-  email: string,
-  role: string
-}
+import { UserDisplay } from "@/lib/typedefs/display-types";
 
 export const columns: ColumnDef<UserDisplay>[] = [
   {

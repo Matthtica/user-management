@@ -1,28 +1,22 @@
-'use client'
-import React, { FC } from "react";
+import React from "react";
 import ButtonFormDialog from "@/components/custom/button-form-dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { useQuery } from "@tanstack/react-query";
-import { type Role, type User } from "@/lib/db/schema";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
+import { RoleDisplay } from "@/lib/typedefs/display-types";
+import { useRolesMap } from "@/lib/hooks";
 import { toast } from "@/components/ui/use-toast";
-import { FetchLoading } from "@/components/custom/loading-helper";
-
-export interface RoleDisplayMap {
-  [key: string]: { value: string, label: string }
-}
 
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
-  roles: RoleDisplayMap
   refetch: () => void
 }
+export default function UserEntryFormDialog({ refetch }: Props) {
+  const { roles } = useRolesMap();
 
-const UserEntryFormDialog: FC<Props> = ({roles, refetch}: Props) => {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -36,7 +30,8 @@ const UserEntryFormDialog: FC<Props> = ({roles, refetch}: Props) => {
 
   const submit = async () => {
     if (name === '') return;
-    const res = await fetch("/api/users", {
+
+    await fetch("/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,11 +42,17 @@ const UserEntryFormDialog: FC<Props> = ({roles, refetch}: Props) => {
         roleId: parseInt(value)
       }),
     }).then((res) => {
-        reset();
-        refetch();
-        return res.json();
+      reset();
+      refetch();
+      return res.json();
+    }).then(data => {
+      toast({
+        description: "User created",
+        title: "Success",
+        variant: "success"
+      });
     }).catch((err) => {
-        console.log(err);
+       console.log(err);
     });
   }
 
@@ -75,7 +76,7 @@ const UserEntryFormDialog: FC<Props> = ({roles, refetch}: Props) => {
             aria-expanded={open}
             className="w-[200px] justify-between flex items-center"
           >
-            {value ? roles[value].label : "Select a role"}
+            {value ? roles?.[parseInt(value)].label : "Select a role"}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -84,7 +85,7 @@ const UserEntryFormDialog: FC<Props> = ({roles, refetch}: Props) => {
             <CommandInput placeholder="Search role..." />
             <CommandEmpty>No role found.</CommandEmpty>
             <CommandGroup>
-              {Object.values(roles).map((role) => (
+              {roles ? Object.values(roles).map((role: RoleDisplay) => (
                 <CommandItem
                   key={role.value}
                   value={role.value}
@@ -101,7 +102,7 @@ const UserEntryFormDialog: FC<Props> = ({roles, refetch}: Props) => {
                   />
                   {role.label}
                 </CommandItem>
-              ))}
+              )) : ''}
             </CommandGroup>
           </Command>
         </PopoverContent>
@@ -109,5 +110,3 @@ const UserEntryFormDialog: FC<Props> = ({roles, refetch}: Props) => {
     </div>
   </ButtonFormDialog>
 }
-
-export default UserEntryFormDialog;
