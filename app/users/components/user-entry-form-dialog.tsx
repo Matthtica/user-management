@@ -49,7 +49,6 @@ export default function UserEntryFormDialog({ refetch }: Props) {
       toast({
         description: "User created",
         title: "Success",
-        variant: "success"
       });
     }).catch((err) => {
        console.log(err);
