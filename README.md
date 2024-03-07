@@ -14,6 +14,9 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### Preview
+[You can watch the demo app here](https://user-management-ruby-two.vercel.app/)
+
 ## Todos
 - [ ] Add delete button for users and products api routes
 - [ ] Refetch and toast message on delete on both routes
