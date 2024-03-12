@@ -1,4 +1,4 @@
-import RTEditor from "./components/rich-text-editor"
+import RTEditor from "@/components/custom/editor/editor"
 
 export default function EditorPage() {
   return <div>
