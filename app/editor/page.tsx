@@ -1,10 +1,8 @@
-import RTEditor from "@/components/custom/editor/editor"
+'use client'
+import RTEditor from "@/components/custom/editor"
 
 export default function EditorPage() {
   return <div>
-    <h1>This is editor page</h1>
-    <div>
-      <RTEditor />
-    </div>
+    <RTEditor className="rounded-lg m-3 border-primary-background border-2" />
   </div>
 }
