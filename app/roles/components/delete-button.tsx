@@ -1,5 +1,5 @@
 import { useDelete, useRoles } from "@/lib/hooks";
-import DeletedRounded from '~icons/material-symbols/delete-rounded';
+import { Trash2 } from "lucide-react";
 import React from "react";
 import { Button } from "@/components/ui/button";
 
@@ -12,6 +12,6 @@ export default function DeleteRoleButton({ itemId }: DeleteButtonProps) {
   const onDelete = useDelete('/api/roles', itemId, refetch);
 
   return <Button variant="outline" size="icon" onClick={onDelete}>
-    <DeletedRounded />
+    <Trash2 size="1.5em" />
   </Button>
 }

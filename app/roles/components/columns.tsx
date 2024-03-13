@@ -1,10 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 import { type Role } from "@/lib/db/schema";
 import { deserializeToDisplayString } from "@/lib/db/utils";
 import { Button } from "@/components/ui/button";
-import DeletedRounded from '~icons/material-symbols/delete-rounded';
-import { useDelete, useRoles } from "@/lib/hooks";
 import DeleteRoleButton from "./delete-button";
 
 export const columns: ColumnDef<Role>[] = [
@@ -18,7 +16,7 @@ export const columns: ColumnDef<Role>[] = [
       return <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
+      >
         Name
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>

@@ -12,6 +12,7 @@ import { SideDrawer, SideButton, SideButtonLabel, SideButtonIcon } from "@/compo
 import { useRouter } from "next/navigation";
 import TanstackQueryClientProvider from "@/lib/tanstack-queryclient-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { Home, Users, UserCog, PenTool } from 'lucide-react';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,11 +22,16 @@ interface RouteConfig {
   icon: React.ReactElement
 }
 
+const iconProps = {
+  strokeWidth: "2px",
+  size: "1.5em"
+}
+
 const routes: RouteConfig[] = [
-  { text: "Home", route: '/', icon: <HomeOutline /> },
-  { text: "User", route: '/users', icon: <UserThreeLight /> },
-  { text: "Role", route: '/roles', icon: <UserRoleSetting /> },
-  { text: "Editor", route: '/editor', icon: <TextEditorNavIcon /> },
+  { text: "Home", route: '/', icon: <Home {...iconProps} /> },
+  { text: "User", route: '/users', icon: <Users {...iconProps} /> },
+  { text: "Role", route: '/roles', icon: <UserCog {...iconProps} /> },
+  { text: "Editor", route: '/editor', icon: <PenTool {...iconProps} /> },
 ];
 
 export default function RootLayout({

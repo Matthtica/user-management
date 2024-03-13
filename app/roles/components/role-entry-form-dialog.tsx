@@ -34,7 +34,7 @@ const RoleEntryFormDialog: FC<RoleEntryFormDialogProps> = ({ refetch, className,
   }
   const submit = async () => {
     if (name === '') return;
-    const res = await fetch("/api/roles", {
+    await fetch("/api/roles", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,13 +45,13 @@ const RoleEntryFormDialog: FC<RoleEntryFormDialogProps> = ({ refetch, className,
         workspacePermission: workspace_perm
       }),
     }).then((res) => {
-        return res.json();
+      return res.json();
     }).then((msg: ResponseToastMessage) => {
-        reset();
-        refetch();
-        toast(msg);
+      reset();
+      refetch();
+      toast(msg);
     }).catch((err) => {
-        console.log(err);
+      console.log(err);
     });
   }
 
