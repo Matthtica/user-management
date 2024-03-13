@@ -104,3 +104,33 @@
 .side-drawer:hover .side-button {
   justify-content: start;
 }
+
+.rt-text-bold {
+  font-weight: bold;
+}
+
+.rt-text-italic {
+  font-style: italic;
+}
+
+.rt-text-strikethrough {
+  text-decoration: line-through;
+}
+
+.rt-text-superscript {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+.rt-text-subscript {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+.rt-text-underline {
+  text-decoration: underline;
+}
+
+.rt-text-underline-strikethrough {
+  text-decoration: line-through underline;
+}
