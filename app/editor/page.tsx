@@ -1,8 +1,8 @@
 'use client'
-import RTEditor from "@/components/custom/editor"
+import Tiptap from "@/components/custom/tiptap"
 
 export default function EditorPage() {
   return <div>
-    <RTEditor className="rounded-lg m-3 border-primary-background border-2" />
+    <Tiptap className="m-3 mx-4 p-1" />
   </div>
 }
