@@ -11,9 +11,10 @@ import { Subscript } from '@tiptap/extension-subscript';
 import { Superscript } from '@tiptap/extension-superscript';
 import { TextStyle } from '@tiptap/extension-text-style';
 import { Color } from '@tiptap/extension-color';
+import { Heading, Level } from '@tiptap/extension-heading';
 
-import { Button } from '../ui/button'
-import { HuePicker as ColorPicker } from 'react-color';
+import { Button } from '@/components/ui/button'
+import { ChromePicker as ColorPicker, ColorResult } from 'react-color';
 import {
   Bold as BoldIc,
   Italic as ItalicIc,
@@ -23,11 +24,20 @@ import {
   Highlighter as HighlighterIc,
   Subscript as SubscriptIc,
   Superscript as SuperscriptIc,
-  Palette
+  Palette, Heading1 as H1Ic,
 } from 'lucide-react';
 import clsx from 'clsx';
-import VerticalDivider from './vertical-divider';
-import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
+import VerticalDivider from '../vertical-divider';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import React, { ChangeEvent } from 'react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
 
 // define your extension array
 const extensions = [
@@ -55,15 +65,30 @@ const iconProps = {
   size: "1.2em",
   strokeWidth: "2px"
 }
+
 function MenuBar() {
   const { editor } = useCurrentEditor();
   const btnClassNames = "h-8 aspect-square"
+
+  const changeColor = (color: ColorResult, event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    editor!.chain().focus().setColor(color.hex).run();
+  }
 
   if (!editor) {
     return null
   }
   return (
     <>
+      <HeadingMenu />
+      <Button
+        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+        size="icon"
+        variant="ghost"
+        className={btnClassNames}
+      >
+        <H1Ic {...iconProps} />
+      </Button>
       <VerticalDivider />
       <Button
         onClick={() => editor.chain().focus().toggleBold().run()}
@@ -138,12 +163,47 @@ function MenuBar() {
         <SuperscriptIc {...iconProps} />
       </Button>
       <Popover>
-        <PopoverTrigger><Palette {...iconProps} /></PopoverTrigger>
+        <PopoverTrigger className={clsx({ "opacity-60": !editor.isActive('superscript') }, btnClassNames)}>
+          <Palette {...iconProps} />
+        </PopoverTrigger>
         <PopoverContent>
-          <ColorPicker onChange={(color, _) => editor.chain().focus().setColor(color.hex).run()} />
+          <ColorPicker onChange={changeColor} />
         </PopoverContent>
       </Popover>
       <VerticalDivider />
     </>
   )
+}
+
+interface HeadingLevelMap { [key: string]: Level }
+
+function HeadingMenu() {
+  const { editor } = useCurrentEditor();
+  const [level, setLevel] = React.useState<string>();
+
+  const lookup: HeadingLevelMap = {
+    "Heading 1": 1,
+    "Heading 2": 2,
+    "Heading 3": 3,
+    "Heading 4": 4,
+    "Heading 5": 5,
+    "Heading 6": 6,
+  }
+
+  const onChangeLevel = (lev: string) => {
+    setLevel(lev)
+    console.log(lev);
+    editor!.chain().focus().toggleHeading({ level: lookup[lev] })
+  }
+
+  return <DropdownMenu>
+    <DropdownMenuTrigger>Heading</DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuRadioGroup value={level} onValueChange={onChangeLevel}>
+        {Object.keys(lookup).map((key) => {
+          return <DropdownMenuRadioItem key={key} value={key}>{key}</DropdownMenuRadioItem>;
+        })}
+      </DropdownMenuRadioGroup>
+    </DropdownMenuContent>
+  </DropdownMenu>
 }
