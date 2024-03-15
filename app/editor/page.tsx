@@ -1,8 +1,10 @@
 'use client'
-import Tiptap from "@/components/custom/tiptap"
+import Tiptap from "@/components/custom/tiptap/tiptap"
+import NovelEditor from "@/components/custom/novel"
 
 export default function EditorPage() {
   return <div>
-    <Tiptap className="m-3 mx-4 p-1" />
+    <Tiptap className="" />
+    <NovelEditor className="" />
   </div>
 }
