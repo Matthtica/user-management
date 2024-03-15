@@ -16,7 +16,7 @@ import React, { useState } from "react";
 
 interface NovelEditorProps extends React.HTMLAttributes<HTMLDivElement> { }
 export default function NovelEditor({ className }: NovelEditorProps) {
-  const [content, setContent] = useState<JSONContent | undefined>("Hello Mom");
+  const [content, setContent] = useState<JSONContent | undefined>();
   const [openNode, setOpenNode] = useState(false);
   const [openLink, setOpenLink] = useState(false);
   const [openColor, setOpenColor] = useState(false);
