@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import TanstackQueryClientProvider from "@/lib/tanstack-queryclient-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Home, Users, UserCog, PenTool } from 'lucide-react';
+import { usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,13 +36,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const router = useRouter();
-  const [currentRoute, setCurrentRoute] = React.useState('/');
-
-  const changeRoute = (route: string) => {
-    setCurrentRoute(route);
-    router.push(route);
-  }
+  const current_path = usePathname();
 
   return (
     <html lang="en">
@@ -56,8 +51,8 @@ export default function RootLayout({
               {routes.map((route) => (
                 <SideButton
                   key={route.text}
-                  isCurrent={currentRoute === route.route}
-                  onClick={() => changeRoute(route.route)}
+                  href={route.route}
+                  isCurrent={current_path === route.route}
                 >
                   <SideButtonIcon>{route.icon}</SideButtonIcon>
                   <SideButtonLabel>{route.text}</SideButtonLabel>
