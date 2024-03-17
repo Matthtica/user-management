@@ -32,7 +32,7 @@ export default function WorkspaceLayout({
 }>) {
   const current_path = usePathname();
 
-  return <div className="flex h-full">
+  return <div className="flex h-full bg-secondary">
     <SideDrawer>
       {routes.map((route) => (
         <SideButton
