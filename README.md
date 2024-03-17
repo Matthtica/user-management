@@ -22,10 +22,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [x] Refetch and toast message on delete on both routes
 - [x] Change FC to classic function component with types
 - [x] Make custom hooks inside hooks.ts file to handle logics
-- [x] Fully styled Rich text editor
+- [x] Fully styled rich text editor
 - [x] Prefetch and optimize route with next link
+- [ ] User feedback with Carousel
+- [ ] Add pagination to the tables
 - [ ] Use useQueries or facilitate api appropiately for users and role combine to display role name in users
-- [ ] DataTable header row should stuck at the top when scrolled
-- [ ] Backend api routes should have request types and response types
 - [ ] Add authentication (from scratch, without auth provider).
 - [ ] Think about how to handle authorization
+- [ ] Backend api routes should have request types and response types
+- [ ] DataTable header row should stuck at the top when scrolled
