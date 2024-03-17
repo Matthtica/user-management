@@ -9,7 +9,7 @@ function SideDrawer({ children }: SideDrawerProps) {
   return <div className={cn("z-30 bg-background shadow-md w-14 relative transition-all",
     "duration-300 grid grid-cols-1 auto-rows-min gap-3 p-2 rounded-md m-2 mr-0 side-drawer",
     "overflow-y-scroll overflow-x-hidden")}>
-    <ModeToggle className="w-full h-10" />
+    <ModeToggle variant="outline" className="w-full h-10" />
     <div className="border-b w-5/6 mx-auto"></div>
     {children}
   </div>
