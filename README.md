@@ -25,6 +25,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [x] Fully styled rich text editor
 - [x] Prefetch and optimize route with next link
 - [ ] User feedback with Carousel
+- [ ] Make ModeToggle without having to choose theme
 - [ ] Add pagination to the tables
 - [ ] Use useQueries or facilitate api appropiately for users and role combine to display role name in users
 - [ ] Add authentication (from scratch, without auth provider).
