@@ -51,7 +51,6 @@ export function useDisplayUsers() {
   const [display_users, setDisplayUsers] = React.useState<UserDisplay[]>([]);
 
   const tranform_users_to_display = (data: User[]) => {
-    console.log("tranform_users_to_display");
     const users_with_role_names = data.map((user) => {
       return {
         id: user.id,
@@ -64,13 +63,9 @@ export function useDisplayUsers() {
   }
 
   React.useEffect(() => {
-    console.log("recalled use effect");
     if (isUserFetched && isRoleFetched) {
       tranform_users_to_display(users!);
-      console.log("Should work");
     }
-    console.log(`isUserSuccess: ${isRoleFetched}, isRoleSuccess: ${isRoleFetched}`);
-    console.log(`isUserPending: ${isUserFetching}, isRolePending: ${isRoleFetching}`);
   }, [isUserFetched && isRoleFetched])
 
   const reload = async () => {
@@ -125,11 +120,11 @@ export function useDelete(url: string, id: number, refetch: () => void) {
       },
       body: JSON.stringify(id),
     })
-    .then(res => res.json())
-    .then((msg: ResponseToastMessage) => {
-      refetch();
-      toast(msg)
-    });
+      .then(res => res.json())
+      .then((msg: ResponseToastMessage) => {
+        refetch();
+        toast(msg)
+      });
   }
 
   return onDelete
