@@ -1,11 +1,22 @@
 'use client'
 import React from "react";
-import { ThemeProvider } from '@/components/theme-provider';
-import { SideDrawer, SideButton, SideButtonLabel, SideButtonIcon } from "@/components/custom/side-drawer";
-import TanstackQueryClientProvider from "@/lib/tanstack-queryclient-provider";
-import { Toaster } from "@/components/ui/toaster";
-import { Home, Users, UserCog, PenTool } from 'lucide-react';
+import {
+  SideDrawer,
+  SideButton,
+  SideButtonLabel,
+  SideButtonIcon,
+} from "@/components/custom/side-drawer";
+import {
+  UsersIcon,
+  UserCogIcon,
+  PenToolIcon,
+  LayoutDashboardIcon,
+  DotIcon,
+} from 'lucide-react';
 import { usePathname } from "next/navigation";
+import ModeToggle from "@/components/custom/mode-toggle";
+import { UserButton, UserProfile } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 interface RouteConfig {
   text: string,
@@ -19,10 +30,10 @@ const iconProps = {
 }
 
 const routes: RouteConfig[] = [
-  { text: "Home", route: '/', icon: <Home {...iconProps} /> },
-  { text: "User", route: '/workspace/users', icon: <Users {...iconProps} /> },
-  { text: "Role", route: '/workspace/roles', icon: <UserCog {...iconProps} /> },
-  { text: "Editor", route: '/workspace/editor', icon: <PenTool {...iconProps} /> },
+  { text: "Dashboard", route: '/workspace/dashboard', icon: <LayoutDashboardIcon {...iconProps} /> },
+  { text: "User", route: '/workspace/users', icon: <UsersIcon {...iconProps} /> },
+  { text: "Role", route: '/workspace/roles', icon: <UserCogIcon {...iconProps} /> },
+  { text: "Editor", route: '/workspace/editor', icon: <PenToolIcon {...iconProps} /> },
 ];
 
 export default function WorkspaceLayout({
@@ -34,16 +45,42 @@ export default function WorkspaceLayout({
 
   return <div className="flex h-full bg-secondary">
     <SideDrawer>
-      {routes.map((route) => (
-        <SideButton
-          key={route.text}
-          href={route.route}
-          isCurrent={current_path === route.route}
-        >
-          <SideButtonIcon>{route.icon}</SideButtonIcon>
-          <SideButtonLabel>{route.text}</SideButtonLabel>
-        </SideButton>
-      ))}
+      <div className="flex flex-col gap-3">
+        <ModeToggle variant="outline" className="w-full h-10" />
+        <div className="border-b w-5/6 mx-auto"></div>
+        {routes.map((route) => (
+          <SideButton
+            key={route.text}
+            href={route.route}
+            isCurrent={current_path === route.route}
+          >
+            <SideButtonIcon>{route.icon}</SideButtonIcon>
+            <SideButtonLabel>{route.text}</SideButtonLabel>
+          </SideButton>
+        ))}
+      </div>
+      <div className="w-full flex item-center justify-center p-1">
+        <UserButton appearance={{
+          elements: {
+            card: "bg-background border border-input text-primary",
+            headerTitle: "text-primary",
+            userButtonPopoverActionButtonText: "text-primary",
+            userButtonPopoverActionButtonIcon: "text-primary",
+            userPreviewSecondaryIdentifier: "text-primary/60",
+          }
+        }}>
+          <UserProfile appearance={{
+            elements: {
+              navbarButton: "bg-cyan-500",
+              card: "bg-background border border-input text-primary",
+              headerTitle: "text-primary",
+              userButtonPopoverActionButtonText: "text-primary",
+              userButtonPopoverActionButtonIcon: "text-primary",
+              userPreviewSecondaryIdentifier: "text-primary/60",
+            }
+          }} />
+        </UserButton>
+      </div>
     </SideDrawer>
     <div className="flex-1 m-2 bg-background rounded-md shadow-md flex flex-col">
       {children}

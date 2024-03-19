@@ -1,16 +1,13 @@
 import React from 'react'
-import ModeToggle from './mode-toggle';
 import { cn } from '@/lib/utils';
 import clsx from 'clsx';
 import Link from 'next/link';
 
 interface SideDrawerProps extends React.HTMLAttributes<HTMLDivElement> { }
 function SideDrawer({ children }: SideDrawerProps) {
-  return <div className={cn("z-30 bg-background shadow-md w-14 relative transition-all",
-    "duration-300 grid grid-cols-1 auto-rows-min gap-3 p-2 rounded-md m-2 mr-0 side-drawer",
-    "overflow-y-scroll overflow-x-hidden")}>
-    <ModeToggle variant="outline" className="w-full h-10" />
-    <div className="border-b w-5/6 mx-auto"></div>
+  return <div className={cn("z-30 bg-background shadow-md w-14 transition-all",
+    "duration-300 flex flex-col p-2 rounded-md m-2 mr-0 side-drawer",
+    "justify-between")}>
     {children}
   </div>
 }
