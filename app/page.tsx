@@ -34,7 +34,15 @@ export default function Home() {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <UserButton />
+            <UserButton appearance={{
+              elements: {
+                card: "bg-background border border-input text-primary",
+                headerTitle: "text-primary",
+                userButtonPopoverActionButtonText: "text-primary",
+                userButtonPopoverActionButtonIcon: "text-primary",
+                userPreviewSecondaryIdentifier: "text-primary/60",
+              }
+            }} />
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
